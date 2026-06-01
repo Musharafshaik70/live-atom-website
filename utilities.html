@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon" />
+        <title>Atom CSS - Utility Documentation</title>
+        <script src="https://unpkg.com/live-atom"></script>
+        <style>
+            /* Base Resets */
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                font-family:
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    Roboto,
+                    "Helvetica Neue",
+                    Arial,
+                    sans-serif;
+                line-height: 1.6;
+            }
+
+            /* Table Styles */
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                text-align: left;
+                margin-top: 1rem;
+            }
+            th,
+            td {
+                border-bottom: 1px solid #dbeafe;
+                padding: 14px 18px;
+            }
+            th {
+                font-weight: 600;
+                color: #155dfc;
+                font-size: 1.1rem;
+            }
+
+            /* Scrollbar */
+            ::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+            ::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #8ec5ff;
+                border-radius: 4px;
+            }
+
+            /* Code tag styling */
+            code {
+                font-family: ui-monospace, monospace;
+                padding: 4px 8px;
+                border-radius: 6px;
+                font-size: 15px;
+                font-weight: 500;
+                background: #eff6ff;
+                color: #155dfc;
+            }
+
+            /* EYE-FRIENDLY DARK MODE OVERRIDES */
+            body.dark-mode {
+                background-color: #0f172a !important;
+                color: #e2e8f0 !important;
+            }
+            body.dark-mode #sidebar,
+            body.dark-mode #header,
+            body.dark-mode #main-content {
+                background-color: #0f172a !important;
+                border-color: #1e293b !important;
+            }
+            body.dark-mode th,
+            body.dark-mode td {
+                border-bottom-color: #1e293b;
+            }
+            body.dark-mode th {
+                color: #38bdf8;
+            }
+            body.dark-mode code {
+                background: #1e293b;
+                color: #7dd3fc;
+                border: 1px solid #334155;
+            }
+            body.dark-mode ::-webkit-scrollbar-thumb {
+                background: #475569;
+            }
+            body.dark-mode .atom-bg-blue-50 {
+                background-color: #0f172a !important;
+            }
+            body.dark-mode .atom-bg-white {
+                background-color: #0f172a !important;
+            }
+            body.dark-mode .atom-text-black {
+                color: #f8fafc !important;
+            }
+            body.dark-mode .atom-text-blue-600 {
+                color: #38bdf8 !important;
+            }
+            body.dark-mode .atom-border-blue-100 {
+                border-color: #1e293b !important;
+            }
+        </style>
+    </head>
+
+    <body
+        class="atom-bg-white atom-text-black atom-transition-colors atom-duration-300 atom-h-screen atom-overflow-hidden atom-flex atom-text-lg dark-mode"
+    >
+        <div
+            id="sidebar"
+            class="atom-w-[300px] atom-h-full atom-border-r atom-border-blue-100 atom-overflow-auto atom-bg-blue-50 atom-flex atom-flex-col atom-transition-colors atom-duration-300"
+        >
+            <div class="atom-p-6 atom-font-black atom-text-3xl atom-uppercase atom-text-blue-600">
+                Atom<span class="atom-text-black">CSS</span>
+            </div>
+            <div class="atom-px-6 atom-pb-6 atom-flex-1 atom-flex atom-flex-col atom-gap-3" id="nav-links">
+                <div class="atom-font-bold atom-mb-2 atom-text-base atom-uppercase">Documentation</div>
+                <a
+                    href="#pseudo-classes"
+                    class="atom-text-blue-600 atom-font-medium atom-no-underline atom-opacity-75 hover:atom-opacity-100 atom-mt-4"
+                    >Pseudo-Classes</a
+                >
+                <a
+                    href="#custom-classes"
+                    class="atom-text-blue-600 atom-font-medium atom-no-underline atom-opacity-75 hover:atom-opacity-100"
+                    >Custom Classes</a
+                >
+            </div>
+        </div>
+
+        <div
+            id="main-content"
+            class="atom-flex-1 atom-h-full atom-overflow-auto atom-relative atom-bg-white atom-transition-colors atom-duration-300"
+        >
+            <div
+                id="header"
+                class="atom-sticky atom-top-0 atom-z-50 atom-p-5 atom-px-10 atom-flex atom-justify-between atom-items-center atom-bg-white atom-border-b atom-border-blue-100 atom-transition-colors atom-duration-300"
+            >
+                <div class="atom-text-base atom-font-medium">v1.3.0 Architecture</div>
+                <div>
+                    <button
+                        id="theme-toggle"
+                        class="atom-cursor-pointer atom-bg-blue-600 hover:atom-bg-blue-700 atom-text-white atom-px-5 atom-py-2 atom-rounded-md atom-font-medium atom-transition-all atom-border-none focus:atom-opacity-75"
+                    >
+                        Toggle Dark Mode
+                    </button>
+                    <button
+                        class="atom-cursor-pointer atom-bg-blue-600 hover:atom-bg-blue-700 atom-text-white atom-px-5 atom-py-2 atom-rounded-md atom-font-medium atom-transition-all atom-border-none focus:atom-opacity-75"
+                    >
+                        <a href="./index.html">Home</a>
+                    </button>
+                </div>
+            </div>
+
+            <div class="atom-p-10 atom-max-w-[1200px] atom-mx-auto" id="doc-content">
+                <h1 class="atom-text-6xl atom-font-black atom-mb-6 atom-text-blue-600">Utility First.</h1>
+                <p class="atom-text-xl atom-mb-12 atom-opacity-75">
+                    Every static configuration, dynamic utility, and pseudo-class behavior in your Atom CSS engine is
+                    mapped below.
+                </p>
+
+                <div id="tables-container" class="atom-flex atom-flex-col atom-gap-12"></div>
+
+                <div id="pseudo-classes" class="atom-mt-12 atom-mb-8">
+                    <h2
+                        class="atom-text-3xl atom-font-bold atom-mb-6 atom-text-blue-600 atom-border-b atom-border-blue-100 atom-pb-3"
+                    >
+                        Pseudo-Classes (Hover, Focus, etc.)
+                    </h2>
+                    <p class="atom-mb-6 atom-opacity-80">
+                        The Atom engine automatically parses pseudo-class prefixes. You can prepend any utility class
+                        with state modifiers.
+                    </p>
+                    <div class="atom-p-6 atom-rounded-md atom-border atom-border-blue-100 atom-bg-blue-50">
+                        <p class="atom-font-bold atom-mb-2">Supported States:</p>
+                        <ul class="atom-ml-6 atom-mb-6 atom-flex atom-flex-col atom-gap-2">
+                            <li><code>hover:</code> - Applies on mouse hover.</li>
+                            <li><code>focus:</code> - Applies when element has DOM focus.</li>
+                            <li><code>active:</code> - Applies when element is being clicked.</li>
+                            <li><code>disabled:</code> - Applies when a form element is disabled.</li>
+                        </ul>
+                        <p class="atom-font-bold atom-mb-2">Live Example:</p>
+                        <button
+                            class="atom-px-6 atom-py-3 atom-rounded-lg atom-bg-blue-100 atom-text-blue-600 hover:atom-bg-blue-600 hover:atom-text-white focus:atom-border focus:atom-border-black atom-transition-colors atom-duration-300 atom-cursor-pointer atom-border-none"
+                        >
+                            Hover & Focus Me
+                        </button>
+                        <p class="atom-text-sm atom-mt-4 atom-opacity-75">
+                            Classes used:
+                            <code
+                                >atom-bg-blue-100 hover:atom-bg-blue-600 hover:atom-text-white focus:atom-border
+                                focus:atom-border-black</code
+                            >
+                        </p>
+                    </div>
+                </div>
+
+                <div id="custom-classes" class="atom-mb-12">
+                    <h2
+                        class="atom-text-3xl atom-font-bold atom-mb-6 atom-text-blue-600 atom-border-b atom-border-blue-100 atom-pb-3"
+                    >
+                        Extending the Engine (Custom Classes)
+                    </h2>
+                    <p class="atom-mb-6 atom-opacity-80">
+                        You can dynamically inject custom component classes into the engine at runtime using the
+                        <code>atomLive.add()</code> API.
+                    </p>
+                    <div
+                        class="atom-p-4 atom-mb-6 atom-bg-blue-100 atom-text-blue-900 atom-rounded-md atom-border-l-[4px] atom-border-blue-600"
+                    >
+                        <strong>⚠️ Important Constraint:</strong> All custom classes registered via this API
+                        <strong>must</strong> start with the <code>atom-</code> prefix to be processed by the engine.
+                    </div>
+
+                    <div class="atom-p-6 atom-rounded-md atom-border atom-border-blue-100 atom-bg-blue-50">
+                        <pre><code class="atom-text-base" style="background:transparent; color:inherit; padding:0; border:none;">// Register a custom button component
+atomLive.add("atom-btn-primary", {
+    "background-color": "#155dfc",
+    "color": "#ffffff",
+    "padding": "12px 24px",
+    "border-radius": "8px",
+    "font-weight": "600",
+    "cursor": "pointer"
+});
+
+// Now you can use class="atom-btn-primary" anywhere in your HTML!</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // ==========================================
+            // 1. STATIC CONFIGURATION MAP
+            // ==========================================
+            const styleMap = {
+                "atom-mx-auto": { "margin-left": "auto", "margin-right": "auto" },
+                "atom-w-full": { width: "100%" },
+                "atom-h-full": { height: "100%" },
+                "atom-w-screen": { width: "100vw" },
+                "atom-h-screen": { height: "100vh" },
+                "atom-h-dvh": { height: "100dvh" },
+                "atom-w-dvw": { width: "100dvw" },
+                "atom-h-svh": { height: "100svh" },
+                "atom-w-svw": { width: "100svw" },
+                "atom-h-lvh": { height: "100lvh" },
+                "atom-w-lvw": { width: "100lvw" },
+                "atom-border": { "border-width": "1px" },
+                "atom-border-solid": { "border-style": "solid" },
+                "atom-border-none": { "border-style": "none" },
+                "atom-rounded-none": { "border-radius": "0px" },
+                "atom-rounded-sm": { "border-radius": "4px" },
+                "atom-rounded-md": { "border-radius": "6px" },
+                "atom-rounded-lg": { "border-radius": "8px" },
+                "atom-rounded-xl": { "border-radius": "12px" },
+                "atom-rounded-2xl": { "border-radius": "16px" },
+                "atom-rounded-full": { "border-radius": "9999px" },
+                "atom-text-xs": { "font-size": "12px" },
+                "atom-text-sm": { "font-size": "14px" },
+                "atom-text-base": { "font-size": "16px" },
+                "atom-text-lg": { "font-size": "18px" },
+                "atom-text-xl": { "font-size": "20px" },
+                "atom-text-2xl": { "font-size": "24px" },
+                "atom-text-3xl": { "font-size": "30px" },
+                "atom-text-4xl": { "font-size": "36px" },
+                "atom-text-5xl": { "font-size": "48px" },
+                "atom-text-left": { "text-align": "left" },
+                "atom-text-center": { "text-align": "center" },
+                "atom-text-right": { "text-align": "right" },
+                "atom-font-light": { "font-weight": "300" },
+                "atom-font-normal": { "font-weight": "400" },
+                "atom-font-medium": { "font-weight": "500" },
+                "atom-font-semibold": { "font-weight": "600" },
+                "atom-font-bold": { "font-weight": "700" },
+                "atom-font-black": { "font-weight": "900" },
+                "atom-uppercase": { "text-transform": "uppercase" },
+                "atom-no-underline": { "text-decoration": "none" },
+                "atom-block": { display: "block" },
+                "atom-inline": { display: "inline" },
+                "atom-hidden": { display: "none" },
+                "atom-flex": { display: "flex" },
+                "atom-grid": { display: "grid" },
+                "atom-flex-col": { "flex-direction": "column" },
+                "atom-items-start": { "align-items": "flex-start" },
+                "atom-items-center": { "align-items": "center" },
+                "atom-justify-center": { "justify-content": "center" },
+                "atom-justify-between": { "justify-content": "space-between" },
+                "atom-cursor-pointer": { cursor: "pointer" },
+                "atom-static": { position: "static" },
+                "atom-relative": { position: "relative" },
+                "atom-absolute": { position: "absolute" },
+                "atom-sticky": { position: "sticky" },
+                "atom-top-0": { top: "0" },
+                "atom-transition-all": {
+                    "transition-property": "all",
+                    "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                },
+                "atom-transition-colors": {
+                    "transition-property": "color, background-color, border-color, text-decoration-color, fill, stroke",
+                    "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                },
+                "atom-overflow-hidden": { overflow: "hidden" },
+                "atom-overflow-auto": { overflow: "auto" },
+                "atom-opacity-0": { opacity: "0" },
+                "atom-opacity-75": { opacity: "0.75" },
+                "atom-opacity-100": { opacity: "1" },
+            };
+
+            const colorPalette = {
+                blue: {
+                    50: "#eff6ff",
+                    100: "#dbeafe",
+                    200: "#bedbff",
+                    300: "#8ec5ff",
+                    400: "#51a2ff",
+                    500: "#2b7fff",
+                    600: "#155dfc",
+                    700: "#1447e6",
+                    800: "#193cb8",
+                    900: "#1c398e",
+                },
+                gray: {
+                    50: "#f9fafb",
+                    100: "#f3f4f6",
+                    200: "#e5e7eb",
+                    300: "#d1d5dc",
+                    400: "#99a1af",
+                    500: "#6a7282",
+                    600: "#4a5565",
+                    700: "#364153",
+                    800: "#1e2939",
+                    900: "#101828",
+                },
+            };
+
+            // ==========================================
+            // 2. DYNAMIC REGEX CONFIGURATION (With Readable Formats)
+            // ==========================================
+            const grammarRules = [
+                {
+                    format: "atom-p-{value}",
+                    match: /^atom-p-(\d+)$/,
+                    action: ([, val]) => ({ padding: `${val * 4}px` }),
+                    desc: "Uniform padding (value × 4px)",
+                },
+                {
+                    format: "atom-px-{value}",
+                    match: /^atom-px-(\d+)$/,
+                    action: ([, val]) => ({ "padding-left": `${val * 4}px`, "padding-right": `${val * 4}px` }),
+                    desc: "Horizontal padding",
+                },
+                {
+                    format: "atom-py-{value}",
+                    match: /^atom-py-(\d+)$/,
+                    action: ([, val]) => ({ "padding-top": `${val * 4}px`, "padding-bottom": `${val * 4}px` }),
+                    desc: "Vertical padding",
+                },
+                {
+                    format: "atom-pt-{value}",
+                    match: /^atom-pt-(\d+)$/,
+                    action: ([, val]) => ({ "padding-top": `${val * 4}px` }),
+                    desc: "Top padding",
+                },
+                {
+                    format: "atom-pb-{value}",
+                    match: /^atom-pb-(\d+)$/,
+                    action: ([, val]) => ({ "padding-bottom": `${val * 4}px` }),
+                    desc: "Bottom padding",
+                },
+                {
+                    format: "atom-pl-{value}",
+                    match: /^atom-pl-(\d+)$/,
+                    action: ([, val]) => ({ "padding-left": `${val * 4}px` }),
+                    desc: "Left padding",
+                },
+                {
+                    format: "atom-pr-{value}",
+                    match: /^atom-pr-(\d+)$/,
+                    action: ([, val]) => ({ "padding-right": `${val * 4}px` }),
+                    desc: "Right padding",
+                },
+
+                {
+                    format: "atom-m-{value}",
+                    match: /^atom-m-(\d+)$/,
+                    action: ([, val]) => ({ margin: `${val * 4}px` }),
+                    desc: "Uniform margin",
+                },
+                {
+                    format: "atom-mx-{value}",
+                    match: /^atom-mx-(\d+)$/,
+                    action: ([, val]) => ({ "margin-left": `${val * 4}px`, "margin-right": `${val * 4}px` }),
+                    desc: "Horizontal margin",
+                },
+                {
+                    format: "atom-my-{value}",
+                    match: /^atom-my-(\d+)$/,
+                    action: ([, val]) => ({ "margin-top": `${val * 4}px`, "margin-bottom": `${val * 4}px` }),
+                    desc: "Vertical margin",
+                },
+                {
+                    format: "atom-mt-{value}",
+                    match: /^atom-mt-(\d+)$/,
+                    action: ([, val]) => ({ "margin-top": `${val * 4}px` }),
+                    desc: "Top margin",
+                },
+
+                {
+                    format: "atom-[w|h]-{value}",
+                    match: /^atom-[wh]-(\d+)$/,
+                    action: ([, val]) => ({ [className.includes("w-") ? "width" : "height"]: `${val * 4}px` }),
+                    desc: "Height/Width scale (value × 4px)",
+                },
+                {
+                    format: "atom-[w|h]-[value]",
+                    match: /^atom-[wh]-\[(.+)\]$/,
+                    action: ([, val]) => ({ [className.includes("w-") ? "width" : "height"]: val }),
+                    desc: "Arbitrary Height/Width (e.g. [300px])",
+                },
+                {
+                    format: "atom-max-[w|h]-[value]",
+                    match: /^atom-max-[wh]-\[(.+)\]$/,
+                    action: ([, val]) => ({ [className.includes("w-") ? "max-width" : "max-height"]: val }),
+                    desc: "Arbitrary Max-Height/Max-Width limit",
+                },
+
+                {
+                    format: "atom-{text|bg}-{black|white}",
+                    match: /^atom-(text|bg)-(black|white)$/,
+                    action: ([, type, color]) => {
+                        const hexCode = color === "black" ? "#000000" : "#ffffff";
+                        return type === "text" ? { color: hexCode } : { "background-color": hexCode };
+                    },
+                    desc: "Pure black/white text or background",
+                },
+                {
+                    format: "atom-text-{color}-{shade}",
+                    match: /^atom-text-([a-z]+)-(\d{2,3})$/,
+                    action: ([, color, shade]) =>
+                        colorPalette[color]?.[shade] ? { color: colorPalette[color][shade] } : null,
+                    desc: "Text color from palette",
+                },
+                {
+                    format: "atom-bg-{color}-{shade}",
+                    match: /^atom-bg-([a-z]+)-(\d{2,3})$/,
+                    action: ([, color, shade]) =>
+                        colorPalette[color]?.[shade] ? { "background-color": colorPalette[color][shade] } : null,
+                    desc: "Background color from palette",
+                },
+                {
+                    format: "atom-text-[hex/rgb/size]",
+                    match: /^atom-text-\[(.+)\]$/,
+                    action: ([, val]) => {
+                        if (/^(#|rgb|hsl|transparent|currentColor)/.test(val)) return { color: val };
+                        return { "font-size": val };
+                    },
+                    desc: "Arbitrary Text Color or Font Size",
+                },
+                {
+                    format: "atom-bg-[hex/rgb]",
+                    match: /^atom-bg-\[(.+)\]$/,
+                    action: ([, val]) => ({ "background-color": val }),
+                    desc: "Arbitrary Background color",
+                },
+
+                {
+                    format: "atom-border-{value}",
+                    match: /^atom-border-(\d+)$/,
+                    action: ([, val]) => ({ "border-width": `${val}px` }),
+                    desc: "Border width in pixels",
+                },
+                {
+                    format: "atom-border-{color}-{shade}",
+                    match: /^atom-border-([a-z]+)-(\d{2,3})$/,
+                    action: ([, color, shade]) =>
+                        colorPalette[color]?.[shade] ? { "border-color": colorPalette[color][shade] } : null,
+                    desc: "Border color from palette",
+                },
+                {
+                    format: "atom-border-[hex/rgb]",
+                    match: /^atom-border-\[(.+)\]$/,
+                    action: ([, val]) => ({ "border-color": val }),
+                    desc: "Arbitrary Border color",
+                },
+
+                {
+                    format: "atom-gap-{value}",
+                    match: /^atom-gap-(\d+)$/,
+                    action: ([, val]) => ({ gap: `${val * 4}px` }),
+                    desc: "Flex/Grid gap sizing (value × 4px)",
+                },
+                {
+                    format: "atom-duration-{ms}",
+                    match: /^atom-duration-(\d+)$/,
+                    action: ([, val]) => ({ "transition-duration": `${val}ms` }),
+                    desc: "Transition duration in milliseconds",
+                },
+            ];
+
+            function parseDynamic(className) {
+                for (const rule of grammarRules) {
+                    const matchData = className.match(rule.match);
+                    if (matchData) return rule.action(matchData);
+                }
+                return null;
+            }
+
+            // ==========================================
+            // 3. RUNTIME DOCS GENERATOR
+            // ==========================================
+            const categories = {
+                "Sizing & Spacing": ["atom-w-", "atom-h-", "atom-m", "atom-p"],
+                "Borders & Rounding": ["atom-border", "atom-rounded-"],
+                Typography: ["atom-text-", "atom-font-", "atom-uppercase"],
+                "Layout & Display": [
+                    "atom-block",
+                    "atom-inline",
+                    "atom-hidden",
+                    "atom-flex",
+                    "atom-grid",
+                    "atom-items-",
+                    "atom-justify-",
+                ],
+                "Transitions & Effects": ["atom-transition", "atom-overflow", "atom-opacity", "atom-duration-"],
+            };
+
+            const categorizeClass = (cls) => {
+                for (const [category, prefixes] of Object.entries(categories)) {
+                    if (prefixes.some((p) => cls.startsWith(p))) return category;
+                }
+                return "Misc";
+            };
+
+            function buildDocs() {
+                const container = document.getElementById("tables-container");
+                const navLinks = document.getElementById("nav-links");
+                const categorized = {};
+
+                Object.keys(styleMap).forEach((cls) => {
+                    const cat = categorizeClass(cls);
+                    if (!categorized[cat]) categorized[cat] = [];
+                    categorized[cat].push(cls);
+                });
+
+                // 1. Render Static Map
+                Object.entries(categorized).forEach(([category, classes]) => {
+                    const id = category.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+                    navLinks.innerHTML += `<a href="#${id}" class="atom-text-blue-600 atom-font-medium atom-no-underline atom-opacity-75 hover:atom-opacity-100">${category}</a>`;
+
+                    let rows = classes
+                        .map(
+                            (cls) => `
+                    <tr>
+                        <td><code>${cls}</code></td>
+                        <td><code style="background: transparent; border: none; padding: 0;">${Object.entries(
+                            styleMap[cls],
+                        )
+                            .map(([k, v]) => `${k}: ${v};`)
+                            .join(" ")}</code></td>
+                    </tr>
+                `,
+                        )
+                        .join("");
+
+                    container.innerHTML += `
+                    <div id="${id}">
+                        <h2 class="atom-text-3xl atom-font-bold atom-mb-6 atom-text-blue-600 atom-border-b atom-border-blue-100 atom-pb-3">${category} (Static)</h2>
+                        <div class="atom-w-full atom-overflow-x-auto atom-border atom-border-blue-100 atom-rounded-md">
+                            <table>
+                                <thead class="atom-bg-blue-50">
+                                    <tr>
+                                        <th class="atom-w-[300px]">Class Utility</th>
+                                        <th>Generated CSS Property</th>
+                                    </tr>
+                                </thead>
+                                <tbody>${rows}</tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                });
+
+                // 2. Render Dynamic Regex section using readable FORMAT property
+                navLinks.innerHTML += `<a href="#dynamic-grammar" class="atom-text-blue-600 atom-font-medium atom-no-underline atom-opacity-75 hover:atom-opacity-100 atom-mt-4">Dynamic Classes</a>`;
+
+                let grammarRows = grammarRules
+                    .map(
+                        (rule) => `
+                <tr>
+                    <td><code>${rule.format}</code></td>
+                    <td class="atom-text-base atom-font-medium atom-opacity-80">${rule.desc}</td>
+                </tr>
+            `,
+                    )
+                    .join("");
+
+                container.innerHTML += `
+                <div id="dynamic-grammar" class="atom-mt-8">
+                    <h2 class="atom-text-3xl atom-font-bold atom-mb-6 atom-text-blue-600 atom-border-b atom-border-blue-100 atom-pb-3">Dynamic Utilities</h2>
+                    <div class="atom-w-full atom-overflow-x-auto atom-border atom-border-blue-100 atom-rounded-md">
+                        <table>
+                            <thead class="atom-bg-blue-50">
+                                <tr>
+                                    <th class="atom-w-[350px]">Class Format</th>
+                                    <th>Behavior Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>${grammarRows}</tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            }
+
+            // ==========================================
+            // 3. RUNTIME CSS ENGINE & EXTENSIBILITY API
+            // ==========================================
+
+            // Expose atomLive API globally for the user
+            window.atomLive = {
+                add: function (className, cssObject) {
+                    if (!className.startsWith("atom-")) {
+                        console.warn(`[Atom CSS] Custom class "${className}" ignored. Must start with 'atom-'.`);
+                        return;
+                    }
+                    styleMap[className] = cssObject;
+
+                    // Re-trigger the CSS injection if the DOM is already loaded
+                    if (document.readyState === "complete" || document.readyState === "interactive") {
+                        window.applyAtomClasses();
+                    }
+                },
+            };
+
+            function initAtomCSS() {
+                const generatedClasses = new Set();
+                let cssString = "";
+
+                const objToCss = (obj) =>
+                    Object.entries(obj)
+                        .map(([k, v]) => `${k}: ${v};`)
+                        .join(" ");
+
+                const pseudoMap = {
+                    hover: ":hover",
+                    focus: ":focus",
+                    active: ":active",
+                    disabled: ":disabled",
+                };
+
+                // Attach to window so atomLive.add can call it
+                window.applyAtomClasses = () => {
+                    document.querySelectorAll("*").forEach((el) => {
+                        if (el.classList && el.classList.length > 0) {
+                            el.classList.forEach((cls) => {
+                                if (generatedClasses.has(cls)) return;
+
+                                let baseCls = cls;
+                                let pseudoSuffix = "";
+
+                                if (cls.includes(":")) {
+                                    const parts = cls.split(":");
+                                    if (parts.length === 2 && pseudoMap[parts[0]]) {
+                                        pseudoSuffix = pseudoMap[parts[0]];
+                                        baseCls = parts[1];
+                                    }
+                                }
+
+                                let rules = styleMap[baseCls] || parseDynamic(baseCls);
+
+                                if (rules) {
+                                    const escapedCls = CSS.escape(cls);
+                                    cssString += `.${escapedCls}${pseudoSuffix} { ${objToCss(rules)} }\n`;
+                                    generatedClasses.add(cls);
+                                }
+                            });
+                        }
+                    });
+
+                    let styleTag = document.getElementById("atom-runtime");
+                    if (!styleTag) {
+                        styleTag = document.createElement("style");
+                        styleTag.id = "atom-runtime";
+                        document.head.appendChild(styleTag);
+                    }
+                    styleTag.textContent = cssString;
+                };
+
+                window.applyAtomClasses();
+
+                const observer = new MutationObserver((mutations) => {
+                    let shouldUpdate = false;
+                    mutations.forEach((m) => {
+                        if ((m.type === "attributes" && m.attributeName === "class") || m.type === "childList")
+                            shouldUpdate = true;
+                    });
+                    if (shouldUpdate) window.applyAtomClasses();
+                });
+                observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+            }
+
+            // Theme Toggle Interactivity
+            document.getElementById("theme-toggle").addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+            });
+
+            // Bootstrap App
+            document.addEventListener("DOMContentLoaded", () => {
+                buildDocs();
+                initAtomCSS();
+            });
+        </script>
+    </body>
+</html>
+
+```

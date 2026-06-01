@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LiveAtom - Runtime CSS Engine</title>
+        <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon" />
+        <script src="https://unpkg.com/live-atom"></script>
+    </head>
+    <body
+        class="atom-bg-gray-950 atom-text-white atom-transition-colors atom-duration-300 atom-overflow-x-hidden"
+        data-light="atom-bg-white atom-text-gray-900"
+        data-dark="atom-bg-gray-950 atom-text-white"
+    >
+        <nav
+            class="atom-w-full atom-bg-gray-900 atom-border-gray-800 atom-border-b atom-px-6 atom-py-4 atom-flex atom-justify-between atom-items-center atom-sticky atom-top-0 atom-z-50 atom-transition-colors atom-duration-300"
+            data-light="atom-bg-white atom-border-gray-200"
+            data-dark="atom-bg-gray-900 atom-border-gray-800"
+        >
+            <div
+                class="atom-text-2xl atom-font-black atom-cursor-pointer"
+                onclick="window.location.href = 'index.html'"
+            >
+                <span class="atom-text-blue-600">Live</span
+                ><span class="atom-text-white" data-light="atom-text-gray-900" data-dark="atom-text-white">Atom</span>
+            </div>
+
+            <div class="atom-flex atom-gap-6 atom-items-center">
+                <a
+                    href="utilities.html"
+                    class="atom-text-sm atom-font-medium atom-text-gray-300 hover:atom-text-blue-600 atom-transition-colors atom-duration-200"
+                    data-light="atom-text-gray-600"
+                    data-dark="atom-text-gray-300"
+                    >Docs & Utilities</a
+                >
+                <a
+                    href="https://github.com/Musharafshaik70/live-atom"
+                    target="_blank"
+                    class="atom-text-sm atom-font-bold atom-text-white hover:atom-text-blue-600 atom-transition-colors atom-duration-200"
+                    data-light="atom-text-gray-900"
+                    data-dark="atom-text-white"
+                    >GitHub</a
+                >
+                <a
+                    href="https://www.npmjs.com/package/live-atom"
+                    target="_blank"
+                    class="atom-bg-blue-100 atom-text-blue-700 hover:atom-bg-blue-200 atom-px-4 atom-py-2 atom-rounded-md atom-text-sm atom-font-bold atom-transition-colors atom-duration-200"
+                    >NPM</a
+                >
+
+                <button
+                    onclick="toggleTheme()"
+                    class="atom-p-2 atom-rounded-full atom-bg-gray-800 atom-text-gray-300 hover:atom-bg-gray-200 atom-transition-colors atom-duration-200"
+                    data-light="atom-bg-gray-100 atom-text-gray-600"
+                    data-dark="atom-bg-gray-800 atom-text-gray-300"
+                >
+                    <svg class="atom-w-5 atom-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                        ></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <main class="atom-w-full atom-max-w-[1200px] atom-mx-auto atom-px-6">
+            <header class="atom-w-full atom-py-24 atom-flex atom-flex-col atom-items-center atom-text-center">
+                <div
+                    class="atom-inline-flex atom-items-center atom-bg-blue-900 atom-border atom-border-blue-700 atom-rounded-full atom-px-4 atom-py-1 atom-mb-8"
+                    data-light="atom-bg-blue-50 atom-border-blue-200"
+                    data-dark="atom-bg-blue-900 atom-border-blue-700"
+                >
+                    <span class="atom-w-2 atom-h-2 atom-bg-blue-500 atom-rounded-full atom-mr-2"></span>
+                    <span
+                        class="atom-text-sm atom-font-medium atom-text-blue-100"
+                        data-light="atom-text-blue-800"
+                        data-dark="atom-text-blue-100"
+                        >Fun fact: This page is built entirely with LiveAtom</span
+                    >
+                </div>
+
+                <h1 class="atom-text-6xl atom-font-extrabold atom-mb-6 atom-max-w-[800px]">
+                    <span class="atom-text-blue-600">Live</span>Atom
+                </h1>
+
+                <p
+                    class="atom-text-xl atom-text-gray-400 atom-max-w-[600px] atom-mb-10"
+                    data-light="atom-text-gray-600"
+                    data-dark="atom-text-gray-400"
+                >
+                    A lightweight runtime CSS library inspired by Tailwind. LiveAtom dynamically parses utility classes
+                    and injects optimized stylesheets directly into the CSSOM on the fly.
+                </p>
+
+                <div class="atom-flex atom-gap-4">
+                    <a
+                        href="#usage"
+                        class="atom-bg-blue-600 hover:atom-bg-blue-700 atom-text-white atom-px-8 atom-py-4 atom-rounded-lg atom-font-semibold atom-transition-colors atom-duration-200"
+                    >
+                        Get Started
+                    </a>
+                    <a
+                        href="utilities.html"
+                        class="atom-bg-gray-800 hover:atom-bg-gray-700 atom-text-white atom-px-8 atom-py-4 atom-rounded-lg atom-font-semibold atom-transition-colors atom-duration-200"
+                        data-light="atom-bg-gray-100 atom-text-gray-900 hover:atom-bg-gray-200"
+                        data-dark="atom-bg-gray-800 atom-text-white hover:atom-bg-gray-700"
+                    >
+                        View Utilities
+                    </a>
+                </div>
+            </header>
+
+            <section
+                class="atom-py-20 atom-border-t atom-border-gray-800"
+                data-light="atom-border-gray-200"
+                data-dark="atom-border-gray-800"
+            >
+                <h2 class="atom-text-4xl atom-font-bold atom-text-center atom-mb-16">Why Choose LiveAtom?</h2>
+
+                <div class="atom-flex atom-flex-wrap atom-justify-center atom-gap-6">
+                    <div
+                        class="atom-w-full atom-max-w-[350px] atom-bg-gray-900 atom-border atom-border-gray-800 atom-p-8 atom-rounded-2xl atom-transition-colors atom-duration-300"
+                        data-light="atom-bg-gray-50 atom-border-gray-200"
+                        data-dark="atom-bg-gray-900 atom-border-gray-800"
+                    >
+                        <div class="atom-text-blue-600 atom-text-2xl atom-mb-4 atom-font-black">01.</div>
+                        <h3 class="atom-text-xl atom-font-bold atom-mb-3">Zero-Build Runtime</h3>
+                        <p
+                            class="atom-text-gray-400 atom-text-sm"
+                            data-light="atom-text-gray-600"
+                            data-dark="atom-text-gray-400"
+                        >
+                            Skip Webpack, Vite, or PostCSS configurations. Just drop the script into your HTML and start
+                            styling immediately in the browser.
+                        </p>
+                    </div>
+
+                    <div
+                        class="atom-w-full atom-max-w-[350px] atom-bg-gray-900 atom-border atom-border-gray-800 atom-p-8 atom-rounded-2xl atom-transition-colors atom-duration-300"
+                        data-light="atom-bg-gray-50 atom-border-gray-200"
+                        data-dark="atom-bg-gray-900 atom-border-gray-800"
+                    >
+                        <div class="atom-text-blue-600 atom-text-2xl atom-mb-4 atom-font-black">02.</div>
+                        <h3 class="atom-text-xl atom-font-bold atom-mb-3">Direct CSSOM Injection</h3>
+                        <p
+                            class="atom-text-gray-400 atom-text-sm"
+                            data-light="atom-text-gray-600"
+                            data-dark="atom-text-gray-400"
+                        >
+                            Bypasses heavy DOM style blocks by writing parsed rules directly into the browser's CSS
+                            Object Model for maximum performance.
+                        </p>
+                    </div>
+
+                    <div
+                        class="atom-w-full atom-max-w-[350px] atom-bg-gray-900 atom-border atom-border-gray-800 atom-p-8 atom-rounded-2xl atom-transition-colors atom-duration-300"
+                        data-light="atom-bg-gray-50 atom-border-gray-200"
+                        data-dark="atom-bg-gray-900 atom-border-gray-800"
+                    >
+                        <div class="atom-text-blue-600 atom-text-2xl atom-mb-4 atom-font-black">03.</div>
+                        <h3 class="atom-text-xl atom-font-bold atom-mb-3">Live DOM Watching</h3>
+                        <p
+                            class="atom-text-gray-400 atom-text-sm"
+                            data-light="atom-text-gray-600"
+                            data-dark="atom-text-gray-400"
+                        >
+                            Powered by native MutationObservers. If you inject HTML components via JavaScript later,
+                            LiveAtom computes and applies styles instantly.
+                        </p>
+                    </div>
+
+                    <div
+                        class="atom-w-full atom-max-w-[350px] atom-bg-gray-900 atom-border atom-border-gray-800 atom-p-8 atom-rounded-2xl atom-transition-colors atom-duration-300"
+                        data-light="atom-bg-gray-50 atom-border-gray-200"
+                        data-dark="atom-bg-gray-900 atom-border-gray-800"
+                    >
+                        <div class="atom-text-blue-600 atom-text-2xl atom-mb-4 atom-font-black">04.</div>
+                        <h3 class="atom-text-xl atom-font-bold atom-mb-3">Smart Style Caching</h3>
+                        <p
+                            class="atom-text-gray-400 atom-text-sm"
+                            data-light="atom-text-gray-600"
+                            data-dark="atom-text-gray-400"
+                        >
+                            Guarantees high-speed execution after the initial parse by caching unique classes and
+                            completely preventing redundant CSS rule generation.
+                        </p>
+                    </div>
+
+                    <div
+                        class="atom-w-full atom-max-w-[350px] atom-bg-gray-900 atom-border atom-border-gray-800 atom-p-8 atom-rounded-2xl atom-transition-colors atom-duration-300"
+                        data-light="atom-bg-gray-50 atom-border-gray-200"
+                        data-dark="atom-bg-gray-900 atom-border-gray-800"
+                    >
+                        <div class="atom-text-blue-600 atom-text-2xl atom-mb-4 atom-font-black">05.</div>
+                        <h3 class="atom-text-xl atom-font-bold atom-mb-3">Static & Dynamic Utilities</h3>
+                        <p
+                            class="atom-text-gray-400 atom-text-sm"
+                            data-light="atom-text-gray-600"
+                            data-dark="atom-text-gray-400"
+                        >
+                            Access hundreds of pre-mapped utilities or use Just-In-Time arbitrary values like
+                            <code class="atom-bg-gray-200 atom-px-1 atom-rounded-sm atom-text-gray-900"
+                                >atom-w-[250px]</code
+                            >
+                            on the fly.
+                        </p>
+                    </div>
+
+                    <div
+                        class="atom-w-full atom-max-w-[350px] atom-bg-gray-900 atom-border atom-border-gray-800 atom-p-8 atom-rounded-2xl atom-transition-colors atom-duration-300"
+                        data-light="atom-bg-gray-50 atom-border-gray-200"
+                        data-dark="atom-bg-gray-900 atom-border-gray-800"
+                    >
+                        <div class="atom-text-blue-600 atom-text-2xl atom-mb-4 atom-font-black">06.</div>
+                        <h3 class="atom-text-xl atom-font-bold atom-mb-3">Baseline Style Reset</h3>
+                        <p
+                            class="atom-text-gray-400 atom-text-sm"
+                            data-light="atom-text-gray-600"
+                            data-dark="atom-text-gray-400"
+                        >
+                            Includes a modern, automated CSS reset injected by default, ensuring absolute cross-browser
+                            consistency without an extra stylesheet.
+                        </p>
+                    </div>
+
+                    <div
+                        class="atom-w-full atom-max-w-[350px] atom-bg-gray-900 atom-border atom-border-gray-800 atom-p-8 atom-rounded-2xl atom-transition-colors atom-duration-300"
+                        data-light="atom-bg-gray-50 atom-border-gray-200"
+                        data-dark="atom-bg-gray-900 atom-border-gray-800"
+                    >
+                        <div class="atom-text-blue-600 atom-text-2xl atom-mb-4 atom-font-black">07.</div>
+                        <h3 class="atom-text-xl atom-font-bold atom-mb-3">Extensible Custom API</h3>
+                        <p
+                            class="atom-text-gray-400 atom-text-sm"
+                            data-light="atom-text-gray-600"
+                            data-dark="atom-text-gray-400"
+                        >
+                            Need a specialized class? Register custom CSS blocks instantly directly in your JavaScript
+                            using the
+                            <code class="atom-bg-gray-200 atom-px-1 atom-rounded-sm atom-text-gray-900"
+                                >liveAtom.addClass()</code
+                            >
+                            method.
+                        </p>
+                    </div>
+
+                    <div
+                        class="atom-w-full atom-max-w-[350px] atom-bg-gray-900 atom-border atom-border-gray-800 atom-p-8 atom-rounded-2xl atom-transition-colors atom-duration-300"
+                        data-light="atom-bg-gray-50 atom-border-gray-200"
+                        data-dark="atom-bg-gray-900 atom-border-gray-800"
+                    >
+                        <div class="atom-text-blue-600 atom-text-2xl atom-mb-4 atom-font-black">08.</div>
+                        <h3 class="atom-text-xl atom-font-bold atom-mb-3">Framework Agnostic</h3>
+                        <p
+                            class="atom-text-gray-400 atom-text-sm"
+                            data-light="atom-text-gray-600"
+                            data-dark="atom-text-gray-400"
+                        >
+                            Seamlessly integrates anywhere. Use it with plain HTML/Vanilla JS, modern frameworks like
+                            React and Vue, or backend templates like PHP.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section
+                id="usage"
+                class="atom-py-20 atom-border-t atom-border-gray-800"
+                data-light="atom-border-gray-200"
+                data-dark="atom-border-gray-800"
+            >
+                <h2 class="atom-text-3xl atom-font-bold atom-mb-8">Installation & Usage</h2>
+
+                <div class="atom-flex atom-flex-wrap atom-gap-8">
+                    <div
+                        class="atom-w-full atom-max-w-[550px] atom-bg-gray-90 atom-border atom-border-gray-800 atom-rounded-2xl atom-p-8 atom-transition-colors atom-duration-300"
+                        data-light="atom-bg-gray-50 atom-border-gray-200"
+                        data-dark="atom-bg-gray-900 atom-border-gray-800"
+                    >
+                        <h3 class="atom-text-lg atom-font-bold atom-mb-6">Via NPM</h3>
+
+                        <p
+                            class="atom-text-sm atom-font-bold atom-text-gray-300 atom-mb-2"
+                            data-light="atom-text-gray-700"
+                            data-dark="atom-text-gray-300"
+                        >
+                            1. Install the package
+                        </p>
+                        <div
+                            class="atom-bg-gray-900 atom-text-gray-100 atom-p-4 atom-rounded-lg atom-font-mono atom-text-sm atom-overflow-auto atom-mb-6"
+                        >
+                            <span class="atom-text-blue-400">npm</span> install live-atom
+                        </div>
+
+                        <p
+                            class="atom-text-sm atom-font-bold atom-text-gray-300 atom-mb-2"
+                            data-light="atom-text-gray-700"
+                            data-dark="atom-text-gray-300"
+                        >
+                            2. Set up the Import Map
+                        </p>
+                        <div
+                            class="atom-bg-gray-900 atom-text-gray-100 atom-p-4 atom-rounded-lg atom-font-mono atom-text-sm atom-overflow-auto atom-mb-6"
+                        >
+                            &lt;<span class="atom-text-blue-400">script</span>
+                            <span class="atom-text-purple-400">type</span>=<span class="atom-text-green-400"
+                                >"importmap"</span
+                            >&gt; { <span class="atom-text-blue-300">"imports"</span>: {
+                            <span class="atom-text-blue-300">"live-atom"</span>:
+                            <span class="atom-text-green-400">"./node_modules/live-atom/main.js"</span> } } &lt;/<span
+                                class="atom-text-blue-400"
+                                >script</span
+                            >&gt;
+                        </div>
+
+                        <p
+                            class="atom-text-sm atom-font-bold atom-text-gray-300 atom-mb-2"
+                            data-light="atom-text-gray-700"
+                            data-dark="atom-text-gray-300"
+                        >
+                            3. Import as a Module
+                        </p>
+                        <div
+                            class="atom-bg-gray-900 atom-text-gray-100 atom-p-4 atom-rounded-lg atom-font-mono atom-text-sm atom-overflow-auto"
+                        >
+                            <span class="atom-text-purple-400">import</span> liveAtom
+                            <span class="atom-text-purple-400">from</span>
+                            <span class="atom-text-green-400">"live-atom"</span>;
+                        </div>
+                    </div>
+
+                    <div
+                        class="atom-w-full atom-max-w-[550px] atom-bg-gray-900 atom-border atom-border-gray-800 atom-rounded-2xl atom-p-8"
+                        data-light="atom-bg-gray-50 atom-border-gray-200"
+                        data-dark="atom-bg-gray-900 atom-border-gray-800"
+                    >
+                        <h3 class="atom-text-lg atom-font-bold atom-mb-4">Via CDN</h3>
+                        <div
+                            class="atom-bg-gray-900 atom-text-gray-100 atom-p-4 atom-rounded-lg atom-font-mono atom-text-sm atom-overflow-auto"
+                        >
+                            &lt;<span class="atom-text-blue-400">script</span>
+                            <span class="atom-text-purple-400">src</span>=<span class="atom-text-green-400"
+                                >"https://unpkg.com/live-atom"</span
+                            >&gt;&lt;/<span class="atom-text-blue-400">script</span>&gt;
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="atom-w-full atom-bg-gray-900 atom-py-12 atom-text-center">
+            <div class="atom-text-2xl atom-font-black atom-mb-4">
+                <span class="atom-text-blue-500">Live</span><span class="atom-text-white">Atom</span>
+            </div>
+            <p class="atom-text-gray-400 atom-text-sm">Designed and built by Musharaf Shaik. MIT Licensed.</p>
+        </footer>
+
+        <script>
+            let isDarkMode = true;
+            function toggleTheme() {
+                isDarkMode = !isDarkMode;
+                const elements = document.querySelectorAll("[data-dark]");
+
+                elements.forEach((el) => {
+                    const lightClasses = el.getAttribute("data-light").split(" ");
+                    const darkClasses = el.getAttribute("data-dark").split(" ");
+
+                    if (isDarkMode) {
+                        el.classList.remove(...lightClasses);
+                        el.classList.add(...darkClasses);
+                    } else {
+                        el.classList.remove(...darkClasses);
+                        el.classList.add(...lightClasses);
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
