@@ -14,6 +14,9 @@ This is the official landing page and documentation showcase for **LiveAtom**, a
 
 Instead, LiveAtom **dynamically parses your HTML for utility classes at runtime** and injects highly optimized, deduplicated styles directly into the browser's CSS Object Model (CSSOM) on the fly.
 
+- 💻 GitHub Repository: https://github.com/Musharafshaik70/live-atom
+- 📦 NPM Package: https://www.npmjs.com/package/live-atom
+
 ---
 
 ## 📌Note:
