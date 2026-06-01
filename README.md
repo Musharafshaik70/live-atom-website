@@ -1,4 +1,4 @@
-readme_content = """# LiveAtom Website 🚀
+# LiveAtom Website 🚀
 
 This is the official landing page and documentation showcase for **LiveAtom**, a lightweight, runtime CSS library inspired by Tailwind CSS. This website is built completely using LiveAtom utility classes to demonstrate its core capabilities, features, and lightning-fast dynamic styles.
 
